@@ -23,24 +23,27 @@ class ListTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return personsArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "\(personsArray[section].name) \(personsArray[section].surname)"
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return personsArray.count
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "listTableViewCell", for: indexPath)
-        
-        let currentPerson =  personsArray[indexPath.row]
-        cell.textLabel?.text = "\(currentPerson.name) \(currentPerson.surname)"
-        return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! DetailViewController
-        if let indexPath = tableView.indexPathForSelectedRow {
-            vc.sourceStructure = personsArray[indexPath.row]
+        if indexPath.row == 0 {
+            cell.textLabel?.text = personsArray[indexPath.section].email
+        } else {
+            cell.textLabel?.text = personsArray[indexPath.section].phoneNumber
         }
+        return cell
     }
     
     private func getRandomNumberFromArray(_ range: Int) -> Int {
