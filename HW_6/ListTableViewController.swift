@@ -35,6 +35,7 @@ class ListTableViewController: UITableViewController {
         return "\(personsArray[section].name) \(personsArray[section].surname)"
     }
     
+    //Header setup
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.contentView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -46,9 +47,12 @@ class ListTableViewController: UITableViewController {
         return 2
     }
     
+    //Cell setup
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.font = UIFont(name: "Kailasa", size: 18)
         cell.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        cell.imageView?.backgroundColor = .white
+        cell.imageView?.layer.cornerRadius = 14
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,7 +71,7 @@ class ListTableViewController: UITableViewController {
         let randomInt = Int.random(in: 0..<range)
         return randomInt
     }
-
+    
     private func createRandomStructure(countOfIterations: Int) {
         for _ in 0..<countOfIterations {
             
